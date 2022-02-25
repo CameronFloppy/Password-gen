@@ -24,87 +24,29 @@ var generatePassword = function () {
   let numConfirm = window.confirm("Use numbers?");
   let specialConfirm = window.confirm("Use special characters?")
   let lengthPrompt = length();
+  let possibleChars = ""
 
-
-  if (capConfirm && lowConfirm && numConfirm && specialConfirm) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (capChars + lowChars + numbers + special).charAt(Math.floor(Math.random() * (capChars + lowChars + numbers + special).length));
-    }
-  }
-  else if (capConfirm && lowConfirm && numConfirm && specialConfirm === false) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (capChars + lowChars + numbers).charAt(Math.floor(Math.random() * (capChars + lowChars + numbers).length));
-    }
-  }
-  else if (capConfirm && lowConfirm && numConfirm === false && specialConfirm === false) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (capChars + lowChars).charAt(Math.floor(Math.random() * (capChars + lowChars).length));
-    }
-  }
-  else if (capConfirm && lowConfirm === false && numConfirm === false && specialConfirm === false) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (capChars).charAt(Math.floor(Math.random() * (capChars).length));
-    }
-  }
-  else if (capConfirm === false && lowConfirm && numConfirm && specialConfirm) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (lowChars + numbers + special).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else if (capConfirm === false && lowConfirm === false && numConfirm && specialConfirm) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (numbers + special).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else if (capConfirm === false && lowConfirm && numConfirm && specialConfirm === false) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (lowChars + numbers).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else if (capConfirm === false && lowConfirm && numConfirm === false && specialConfirm) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (lowChars + special).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else if (capConfirm === false && lowConfirm && numConfirm === false && specialConfirm === false) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (lowChars).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else if (capConfirm && lowConfirm && numConfirm === false && specialConfirm) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (capChars + lowChars + special).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else if (capConfirm && lowConfirm === false && numConfirm && specialConfirm) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (capChars + numbers + special).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else if (capConfirm && lowConfirm === false && numConfirm && specialConfirm === false) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (capChars + numbers).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else if (capConfirm === false && lowConfirm && numConfirm === false && specialConfirm) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (capChars + numbers + special).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else if (capConfirm === false && lowConfirm === false && numConfirm && specialConfirm === false) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (numbers).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else if (capConfirm === false && lowConfirm === false && numConfirm === false && specialConfirm) {
-    for (var i = 0; i < lengthPrompt; i++) {
-      result += (special).charAt(Math.floor(Math.random() * lengthPrompt));
-    }
-  }
-  else {
+  if (capConfirm) {
+    possibleChars += capChars;
+  };
+  if (lowConfirm) {
+    possibleChars += lowChars;
+  };
+  if (numConfirm) {
+    possibleChars += numbers;
+  };
+  if (specialConfirm) {
+    possibleChars += special;
+  };
+  if (capConfirm === false && lowConfirm === false && numConfirm === false && specialConfirm === false) {
     window.alert("Please select at least one type of character.")
     generatePassword();
+  };
+
+  for (var i = 0; i < lengthPrompt; i++) {
+    result += (possibleChars).charAt(Math.floor(Math.random() * possibleChars.length))
   }
+
   console.log(result);
   return result;
 }
